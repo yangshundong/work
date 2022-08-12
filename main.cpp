@@ -3,30 +3,36 @@
 #include <string>
 using namespace std;
 
-class da {
+class point {
 public:
-	da(int a1) { a = a1; type = in; };
-	da(char b1) { b = b1; type = ch; }
-	da(double c1) { c = c1; type = dou; }
+	point() :x(0), y(0) { cnt++; }
+	int getx() { return x; }
+	int gety() { return y; }
+	void set(int a, int b);
+	point(point& p) { x = p.x; y = p.y; cnt++; }
+	~point() { cnt--; }
 	void show();
-
 private:
-	enum { in, ch, dou }type;
-	union {
-		int a;
-		char b;
-		double c;
-	};
-};
-void da::show() {
-	if (type == in)cout << a;
-	else if (type == ch)cout << b;
-	else if (type == dou)cout << c;
-	cout << endl;
+	int x, y; 
+	static int cnt ;
 };
 
-int main() {
-	da k('o'); k.show();
-	da p(3.0); p.show();
+
+
+int point::cnt = 0;
+
+void point::set(int a, int b) {
+	x = a; y = b;
+};
+void point::show() {
+	printf("(%d,%d) cnt:%d \n", x, y, cnt);
 }
 
+int main() {
+	point a[10];
+	for (int i = 0; i < 10; ++i) {
+		a[i].set(i, i + 1);
+		a[i].show();
+	}
+
+}
