@@ -1,1 +1,2 @@
 # work
+some C++ exercises;
